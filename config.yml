@@ -1,0 +1,81 @@
+##On join welcome section
+welcome-message: '&aWelcome %p to the server!'
+welcome-title: ""
+welcome-subtitle: ""
+global-welcome-message: '&aWelcome to %p to this server!'
+global-welcome: true
+disable-welcome: false
+
+##On join spawn section
+spawn-every-join: true
+
+##Spawn general section
+
+#Number of blocks protected by PathFinder-Protection module
+#If you not have PathFinder-Protection this options not work
+spawn-protection: false
+spawn:
+  x: 0
+  y: 0
+  z: 0
+  yaw: 0
+  world: ""
+
+tpa:
+  max-time: 120
+  only-safe-location: true
+
+
+warp:
+  damage-safe-time: 120
+  only-safe-location: true
+  cooldown: 12
+warps: {}
+
+gamemode:
+  only-op: false
+  creative-damage-allow: false
+
+sign:
+  colored-sign: true
+
+staff-chat:
+  format: "&aSTAFF-CHAT &7> &f%p: &b%text"
+
+freeze:
+  start-message: "&aCheat control!"
+  move-message: "&aWarning: Cheat control in progress!"
+  checker-format: "&a[CHECKER] &e%c: &b%text"
+  controlled-format: "&c[CONTROLLED] &e%p: &b%text"
+  finish: "&aCheat control is finish!"
+  ignored-commands:
+    - warp
+    - spawn
+    - tpa
+  reasons:
+    killaura:
+      commands:
+        - kick %p Killaura detected!
+    exploit:
+      commands:
+        - kick %p Exploiting detected!
+    nothing:
+      commands:
+        - spawn %p
+        - spawn %c
+
+afk:
+  invulnerable: true
+
+op-list: {}
+rules: "&a(1)This is a test%n&a(2)This is another test"
+
+tag:
+  mention-message: "&aYou have been mentioned by &e%p"
+  mention-sound: "BLOCK_CHEST_OPEN"
+  format: "&a%p: %text&e%tag"
+
+random-tp:
+  max-range: 500
+  max-attempts: 5
+  cooldown: 12

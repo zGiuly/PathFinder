@@ -1,0 +1,107 @@
+name: PathFinder
+version: 1.4
+author: Artemide
+api-version: 1.13
+main: it.artmistech.pathfinder.PathFinder
+commands:
+  setspawn:
+    usage: /setspawn
+    permission: pathfinder.setspawn
+    permission-message: §cYou do not have <permission> permission
+  spawn:
+    usage: /spawn (player)
+    permission: pathfinder.spawn
+    permission-message: §cYou do not have <permission> permission
+  pfreload:
+    usage: /pfreload
+    permission: pathfinder.reload
+    permission-message: §cYou do not have <permission> permission
+  tpa:
+    usage: /tpa (user)
+    permission: pathfinder.tpa
+    permission-message: §cYou do not have <permission> permission
+  warp:
+    usage: /warp (name)
+    permission: pathfinder.warp
+    permission-message: §cYou do not have <permission> permission
+  setwarp:
+    usage: /setwarp (name)
+    permission: pathfinder.setwarp
+    permission-message: §cYou do not have <permission> permission
+  gamemode:
+    usage: /gamemode (gamemode) (name)
+    permission: pathfinder.gamemode
+    permission-message: §cYou do not have <permission> permission
+  tphere:
+    usage: /tphere (player)
+    permission: pathfinder.tphere
+    permission-message: §cYou do not have <permission> permission
+  tpall:
+    usage: /tpall
+    permission: pathfinder.tpall
+    permission-message: §cYou do not have <permission> permission
+  vanish:
+    usage: /vanish
+    permission: pathfinder.vanish
+    permission-message: §cYou do not have <permission> permission
+    aliases: [v]
+  killall:
+    usage: /killall (type)
+    permission: pathfinder.killall
+    permission-message: §cYou do not have <permission> permission
+  follow:
+    usage: /follow (name)
+    permission: pathfinder.follow
+    permission-message: §cYou do not have <permission> permission
+  thor:
+    usage: /thor
+    permission: pathfinder.thor
+    permission-message: §cYou do not have <permission> permission
+  staffchat:
+    usage: /staffchat
+    permission: pathfinder.staffchat
+    permission-message: §cYou do not have <permission> permission
+    aliases: [sc]
+  see:
+    usage: /see
+    permission: pathfinder.see
+    permission-message: §cYou do not have <permission> permission
+    aliases: [invsee]
+  freeze:
+    usage: /freeze (name)
+    permission: pathfinder.freeze
+    permission-message: §cYou do not have <permission> permission
+  finish:
+    usage: /finish (name) (reason)
+    permission: pathfinder.finish
+    permission-message: §cYou do not have <permission> permission
+  kittycannon:
+    usage: /kittycannon
+    permission: pathfinder.kittycannon
+    permission-message: §cYou do not have <permission> permission
+  warps:
+    usage: /warps
+    permission: pathfinder.warps
+    permission-message: §cYou do not have <permission> permission
+  afk:
+    usage: /afk
+    permission: pathfinder.afk
+    permission-message: §cYou do not have <permission> permission
+  rules:
+    usage: /rules
+  commandspy:
+    usage: /commandspy
+    permission: pathfinder.commandspy
+    permission-message: §cYou do not have <permission> permission
+  clear:
+    usage: /clear
+    permission: pathfinder.clear
+    permission-message: §cYou do not have <permission> permission
+  god:
+    usage: /god
+    permission: pathfinder.god
+    permission-message: §cYou do not have <permission> permission
+  randomtp:
+    usage: /randomtp
+    permission: pathfinder.randomtp
+    permission-message: §cYou do not have <permission> permission
