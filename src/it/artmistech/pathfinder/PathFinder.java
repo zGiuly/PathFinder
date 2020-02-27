@@ -119,6 +119,7 @@ public class PathFinder extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(data);
     }
 
+    @Deprecated
     public TpaManager getTpaManager() {
         return tpaManager;
     }

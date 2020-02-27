@@ -1,5 +1,5 @@
 name: PathFinder
-version: 1.4
+version: 1.5
 author: Artemide
 api-version: 1.13
 main: it.artmistech.pathfinder.PathFinder

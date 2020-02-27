@@ -9,6 +9,10 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Temporarily broken
+ */
+@Deprecated
 public class TpaManager {
     private final Map<String, String> players;
     private final Map<String, BukkitTask> playersTask;
@@ -46,6 +50,7 @@ public class TpaManager {
 
         return true;
     }
+
 
     public boolean acceptTpa(Player player) {
         if(!tpaInHandling(player)) return false;
