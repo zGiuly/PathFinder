@@ -27,7 +27,7 @@ public class CommandSpy extends AbstractCommand {
             player.sendMessage("§aCommand spy enabled");
         } else {
             activeUsers.remove(player.getName());
-            player.sendMessage("§Command spy disabled");
+            player.sendMessage("§cCommand spy disabled");
         }
     }
 

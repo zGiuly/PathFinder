@@ -60,23 +60,4 @@ public class LocationUtils {
                 config.getDouble(path + ".z"),
                 (float) config.getInt(path + ".yaw"), 0);
     }
-
-
-    public static CustomLocation getBelowLocation(Location location) {
-        double i = location.getY();
-        Location belowLocation = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ());
-        while (true) {
-            if (i <= 0) {
-                return null;
-            }
-
-            belowLocation.setY(belowLocation.getY() - i);
-
-            if (belowLocation.getBlock() == null || belowLocation.getBlock().getType() == Material.AIR) {
-                i--;
-            } else {
-                return CustomLocation.fromLocation(belowLocation);
-            }
-        }
-    }
 }

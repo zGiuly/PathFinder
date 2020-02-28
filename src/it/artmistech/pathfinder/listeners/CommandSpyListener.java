@@ -16,6 +16,8 @@ public class CommandSpyListener extends AbstractListener {
     public void spyCommand(PlayerCommandPreprocessEvent event) {
         if(event.getMessage().startsWith("/")) {
             CommandSpy.getActiveUsers().forEach(user -> {
+                if(event.getPlayer().getName().equals(user)) return;
+
                 Player player = Bukkit.getPlayerExact(user);
 
                 if(player == null || !player.isOnline()) {
@@ -23,7 +25,7 @@ public class CommandSpyListener extends AbstractListener {
                     return;
                 }
 
-                player.sendMessage("§aCommandSpy > " + "§e"+event.getPlayer().getName() + " §a " + event.getMessage());
+                player.sendMessage("§aCommandSpy > " + "§e"+event.getPlayer().getName() + " §a" + event.getMessage());
             });
         }
     }

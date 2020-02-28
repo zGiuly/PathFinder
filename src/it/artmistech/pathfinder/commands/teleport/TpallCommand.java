@@ -3,6 +3,7 @@ package it.artmistech.pathfinder.commands.teleport;
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.AbstractCommand;
 import it.artmistech.pathfinder.enums.SenderEnum;
+import it.artmistech.pathfinder.types.CustomLocation;
 import it.artmistech.pathfinder.utils.LocationUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -18,9 +19,16 @@ public class TpallCommand extends AbstractCommand {
 
         if(!player.hasPermission("pathfider.tpall")) return;
 
+        CustomLocation location = CustomLocation.fromLocation(player.getLocation());
+
+        if(!location.isSafe()) {
+            player.sendMessage("§cLocation is unsafe");
+            return;
+        }
+
         player.getWorld().getPlayers().forEach(worldPlayer -> {
             if(!worldPlayer.getName().equals(player.getName())) {
-                worldPlayer.teleport(LocationUtils.getBelowLocation(player.getLocation()));
+                worldPlayer.teleport(location);
             }
         });
 
