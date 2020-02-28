@@ -11,7 +11,9 @@ import it.artmistech.pathfinder.commands.teleport.TphereCommand;
 import it.artmistech.pathfinder.listeners.*;
 import it.artmistech.pathfinder.io.PluginFile;
 import it.artmistech.pathfinder.manager.TpaManager;
+import it.artmistech.pathfinder.sqlite.Database;
 import it.artmistech.pathfinder.updater.UpdateCheck;
+import it.artmistech.pathfinder.utils.DatabaseUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -21,6 +23,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class PathFinder extends JavaPlugin {
     private PluginFile baseConfig;
+    private Database defaultDatabase;
     private TpaManager tpaManager;
 
     @Override
@@ -31,6 +34,7 @@ public class PathFinder extends JavaPlugin {
         setupFiles();
         setupCommands();
         setupEvents();
+        setupDatabase();
 
 
         sendConsoleMessage("§aPathFinder enabled!\n§4Made by Artemide");
@@ -48,6 +52,16 @@ public class PathFinder extends JavaPlugin {
 
     private void setupFiles() {
         baseConfig = new PluginFile("config.yml", this, "config.yml");
+    }
+
+    private void setupDatabase() {
+        try {
+            defaultDatabase = new Database(getDataFolder(), "defaultData.db");
+            DatabaseUtils.createDefaultNicknameTable(defaultDatabase);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
     }
 
     private void setupCommands() {
@@ -78,6 +92,7 @@ public class PathFinder extends JavaPlugin {
         new TpallCommand(this);
         new TphereCommand(this);
         new RandomTpCommand(this);
+        new NickCommand(this);
     }
 
     private void setupEvents() {
@@ -95,6 +110,7 @@ public class PathFinder extends JavaPlugin {
         new VanishJoinListener(this);
         new WelcomeListener(this);
         new GodModeListener(this);
+        new PlayerJoinListener(this);
     }
 
     public void saveAllConfig() {
@@ -117,6 +133,10 @@ public class PathFinder extends JavaPlugin {
 
     private void sendConsoleMessage(String data) {
         Bukkit.getConsoleSender().sendMessage(data);
+    }
+
+    public Database getDefaultDatabase() {
+        return defaultDatabase;
     }
 
     @Deprecated

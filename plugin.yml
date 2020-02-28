@@ -98,10 +98,14 @@ commands:
     permission: pathfinder.clear
     permission-message: §cYou do not have <permission> permission
   god:
-    usage: /god
+    usage: /god (name)
     permission: pathfinder.god
     permission-message: §cYou do not have <permission> permission
   randomtp:
     usage: /randomtp
     permission: pathfinder.randomtp
+    permission-message: §cYou do not have <permission> permission
+  nick:
+    usage: /nick (name)
+    permission: pathfinder.nick
     permission-message: §cYou do not have <permission> permission
