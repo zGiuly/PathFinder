@@ -14,7 +14,6 @@ public class NickCommand extends AbstractCommand {
         super(SenderEnum.ALL, pathFinder, "nick");
     }
 
-    //Currently not functional
     @Override
     public void execute(CommandSender sender, String[] strings) {
         if (!sender.hasPermission("pathfinder.nick")) return;
@@ -27,7 +26,7 @@ public class NickCommand extends AbstractCommand {
                 player.setCustomName(player.getName());
                 player.setDisplayName(player.getName());
 
-                NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), player.getName(), player.getName());
+                NicknameUtils.removeName(getPathFinder().getDefaultDatabase(), player.getName());
                 return;
             }
 
@@ -43,7 +42,7 @@ public class NickCommand extends AbstractCommand {
 
             player.sendMessage("§aNew nickname is §e" + strings[0]);
 
-            NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), strings[0], player.getName());
+            NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), player.getName(), strings[0]);
         } else if (strings.length == 2) {
             if (!player.hasPermission("pathfinder.nick.other")) return;
 
@@ -71,7 +70,7 @@ public class NickCommand extends AbstractCommand {
             target.setDisplayName(coloredNick);
             target.sendMessage("§cNow your name is §e" + strings[1]);
 
-            NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), strings[0], strings[1]);
+            NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), strings[1], strings[0]);
         } else {
             player.sendMessage("§cSyntax error");
         }

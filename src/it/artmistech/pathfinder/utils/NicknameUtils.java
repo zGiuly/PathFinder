@@ -3,6 +3,7 @@ package it.artmistech.pathfinder.utils;
 import it.artmistech.pathfinder.sqlite.Database;
 
 import javax.annotation.Nonnull;
+import javax.xml.crypto.Data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -91,6 +92,22 @@ public class NicknameUtils {
             statement.setString(1, name);
             statement.setString(2, realname);
 
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Delete name in database
+     * @param database
+     * @param name
+     */
+    public static void removeName(@Nonnull Database database, @Nonnull String name) {
+        String query = "DELETE FROM playerNickname WHERE realname = ?";
+
+        try (PreparedStatement statement = database.getConnection().prepareStatement(query)) {
+            statement.setString(1, name);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
