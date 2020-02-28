@@ -15,7 +15,7 @@ public class NicknameUtils {
      * @param name
      */
     public static String extractRealNameFromDatabase(@Nonnull Database database, @Nonnull String name) {
-        String query = "SELECT * FROM playerNickname WHERE realname = ?";
+        String query = "SELECT * FROM playerNickname WHERE newname = ?";
         String realname = null;
 
         try(PreparedStatement statement = database.getConnection().prepareStatement(query)) {
@@ -38,7 +38,7 @@ public class NicknameUtils {
      * @param name
      */
     public static String extractNewNameFromDatabase(@Nonnull Database database, @Nonnull String name) {
-        String query = "SELECT * FROM playerNickname WHERE newname = ?";
+        String query = "SELECT * FROM playerNickname WHERE realname = ?";
         String newName = null;
 
         try(PreparedStatement statement = database.getConnection().prepareStatement(query)) {
@@ -47,7 +47,7 @@ public class NicknameUtils {
             ResultSet resultSet = statement.executeQuery();
 
             while(resultSet.next()) {
-                newName = resultSet.getString("realname");
+                newName = resultSet.getString("newname");
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -64,8 +64,7 @@ public class NicknameUtils {
     public static void saveName(@Nonnull Database database, @Nonnull String name, @Nonnull String realname) {
         String query = "INSERT INTO playerNickname VALUES (?,?)";
 
-        if(extractRealNameFromDatabase(database, name) == null) {
-
+        if(extractNewNameFromDatabase(database, realname) == null) {
             try (PreparedStatement statement = database.getConnection().prepareStatement(query)) {
                 statement.setString(1, realname);
                 statement.setString(2, name);

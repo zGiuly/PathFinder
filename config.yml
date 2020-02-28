@@ -21,27 +21,42 @@ spawn:
   yaw: 0
   world: ""
 
+#Tpa section
 tpa:
+  #Max time for accept request
   max-time: 120
+  #Only safe location
   only-safe-location: true
 
 
+#Warp section
 warp:
+  #Damage protection time
   damage-safe-time: 120
+  #Warp to only safe location
   only-safe-location: true
+  #Warp cooldown command
   cooldown: 12
 warps: {}
 
+#Gamemode section
 gamemode:
+  #Only op gamemode
   only-op: false
+  #Allows you to receive damage in creative
   creative-damage-allow: false
 
+#Sign section
 sign:
+  #Allows you to color a sign
   colored-sign: true
 
+#Staff chat section
 staff-chat:
+  #Staffchat format
   format: "&aSTAFF-CHAT &7> &f%p: &b%text"
 
+#Freeze section
 freeze:
   start-message: "&aCheat control!"
   move-message: "&aWarning: Cheat control in progress!"
@@ -64,18 +79,34 @@ freeze:
         - spawn %p
         - spawn %c
 
+#Afk section
 afk:
   invulnerable: true
 
+#Op list protection
 op-list: {}
+
+#Rules section
 rules: "&a(1)This is a test%n&a(2)This is another test"
 
+#Mention section
 tag:
   mention-message: "&aYou have been mentioned by &e%p"
   mention-sound: "BLOCK_CHEST_OPEN"
   format: "&a%p: %text&e%tag"
 
+
+#Randomtp section
 random-tp:
   max-range: 500
+  #Max attempts to search a safe location
   max-attempts: 5
   cooldown: 12
+
+
+#Nickname section
+nickname:
+  #Allows you to select a colored nickname
+  colors: false
+  #Max lenght of custom nickname
+  lenght: 12

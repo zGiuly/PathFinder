@@ -17,6 +17,7 @@ public class NickCommand extends AbstractCommand {
     @Override
     public void execute(CommandSender sender, String[] strings) {
         if (!sender.hasPermission("pathfinder.nick")) return;
+        int maxLenght = configInt("nickname.lenght");
 
         Player player = (Player) sender;
 
@@ -25,35 +26,66 @@ public class NickCommand extends AbstractCommand {
             if(strings[0].equalsIgnoreCase("clear")) {
                 player.setCustomName(player.getName());
                 player.setDisplayName(player.getName());
+                player.setPlayerListName(player.getName());
 
                 NicknameUtils.removeName(getPathFinder().getDefaultDatabase(), player.getName());
+
+                player.sendMessage("§aNickname reset");
+                return;
+            } else if(strings[0].equals(player.getName())) {
+                player.setCustomName(player.getName());
+                player.setDisplayName(player.getName());
+                player.setPlayerListName(player.getName());
+
+                NicknameUtils.removeName(getPathFinder().getDefaultDatabase(), player.getName());
+
+                player.sendMessage("§aNickname reset");
                 return;
             }
 
-            String coloredNick = ChatColor.translateAlternateColorCodes('&', strings[0]);
+            String coloredNick = strings[0];
 
-            if (nicknameExists(strings[0])) {
+            if(configBoolean("nickname.colors")) {
+                coloredNick = ChatColor.translateAlternateColorCodes('&', strings[0]);
+            }
+
+            if(strings[0].length() >= maxLenght) {
+                player.sendMessage("§cNickname max lenght is " + maxLenght);
+                return;
+            }
+
+            if (!nicknameExists(strings[0])) {
                 player.sendMessage("§cNickname already exists");
                 return;
             }
 
             player.setDisplayName(coloredNick);
             player.setCustomName(coloredNick);
+            player.setPlayerListName(coloredNick);
 
             player.sendMessage("§aNew nickname is §e" + strings[0]);
 
-            NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), player.getName(), strings[0]);
+            NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), strings[0], player.getName());
         } else if (strings.length == 2) {
             if (!player.hasPermission("pathfinder.nick.other")) return;
 
-            if (nicknameExists(strings[1])) {
+            if (!nicknameExists(strings[1])) {
                 player.sendMessage("§cNickname already exists");
                 return;
             }
 
-            String coloredNick = ChatColor.translateAlternateColorCodes('&', strings[1]);
+            if(strings[1].length() >= maxLenght) {
+                player.sendMessage("§cNickname max lenght is " + maxLenght);
+                return;
+            }
 
-            Player target = Bukkit.getPlayerExact(strings[1]);
+            String coloredNick = strings[1];
+
+            if(configBoolean("nickname.colors")) {
+                coloredNick = ChatColor.translateAlternateColorCodes('&', strings[1]);
+            }
+
+            Player target = Bukkit.getPlayerExact(strings[0]);
 
             if (target == null || !target.isOnline()) {
                 player.sendMessage("§cPlayer offline!");
@@ -63,14 +95,16 @@ public class NickCommand extends AbstractCommand {
             if(strings[1].equals(target.getName())) {
                 target.setDisplayName(target.getName());
                 target.setCustomName(target.getName());
-                NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), target.getName(), strings[1]);
+
+                NicknameUtils.removeName(getPathFinder().getDefaultDatabase(), target.getName());
             }
 
             target.setCustomName(coloredNick);
             target.setDisplayName(coloredNick);
+            player.setPlayerListName(coloredNick);
             target.sendMessage("§cNow your name is §e" + strings[1]);
 
-            NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), strings[1], strings[0]);
+            NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), strings[1], target.getName());
         } else {
             player.sendMessage("§cSyntax error");
         }
@@ -78,9 +112,6 @@ public class NickCommand extends AbstractCommand {
 
 
     private boolean nicknameExists(String name) {
-        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            if (onlinePlayer.getDisplayName().equals(name)) return true;
-        }
-        return false;
+        return NicknameUtils.extractRealNameFromDatabase(getPathFinder().getDefaultDatabase(), name) == null;
     }
 }

@@ -13,6 +13,7 @@ public class SignChangeListener extends AbstractListener {
     @EventHandler
     public void signChange(SignChangeEvent event) {
         if(!configBoolean("sign.colored-sign")) return;
+        if(!event.getPlayer().hasPermission("pathfinder.sign.colored")) return;
 
         for (int i = 0; i < event.getLines().length; i++) {
             String text = event.getLine(i);

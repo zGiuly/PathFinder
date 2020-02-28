@@ -18,5 +18,6 @@ public class PlayerJoinListener extends AbstractListener {
 
         event.getPlayer().setDisplayName(newName);
         event.getPlayer().setCustomName(newName);
+        event.getPlayer().setPlayerListName(newName);
     }
 }
