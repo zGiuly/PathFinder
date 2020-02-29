@@ -13,7 +13,6 @@ import it.artmistech.pathfinder.commands.teleport.TphereCommand;
 import it.artmistech.pathfinder.economy.PathEconomy;
 import it.artmistech.pathfinder.listeners.*;
 import it.artmistech.pathfinder.io.PluginFile;
-import it.artmistech.pathfinder.manager.TpaManager;
 import it.artmistech.pathfinder.sqlite.Database;
 import it.artmistech.pathfinder.updater.UpdateCheck;
 import it.artmistech.pathfinder.utils.DatabaseUtils;
@@ -28,8 +27,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class PathFinder extends JavaPlugin {
     private PluginFile baseConfig;
     private Database defaultDatabase;
-    private TpaManager tpaManager;
-    private boolean findVault;
     private Economy economy;
 
     @Override
@@ -73,14 +70,11 @@ public class PathFinder extends JavaPlugin {
     }
 
     private void setupEconomy() {
-        findVault = false;
-
         Plugin vault = Bukkit.getPluginManager().getPlugin("Vault");
 
         if (vault == null) {
             sendConsoleMessage("Vault not found");
         } else {
-            findVault = true;
             PathEconomy pathEconomy = new PathEconomy(defaultDatabase);
 
             if (!getConfig().getBoolean("economy.use-economy")) {
@@ -103,8 +97,6 @@ public class PathFinder extends JavaPlugin {
     }
 
     private void setupCommands() {
-        tpaManager = new TpaManager(this);
-
         new AfkCommand(this);
         new ClearCommand(this);
         new GamemodeCommand(this);
@@ -177,11 +169,6 @@ public class PathFinder extends JavaPlugin {
 
     public Database getDefaultDatabase() {
         return defaultDatabase;
-    }
-
-    @Deprecated
-    public TpaManager getTpaManager() {
-        return tpaManager;
     }
 
     public Economy getEconomy() {
