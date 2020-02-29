@@ -110,3 +110,7 @@ nickname:
   colors: false
   #Max lenght of custom nickname
   lenght: 12
+
+economy:
+  start-balance: 100.0
+  use-economy: true

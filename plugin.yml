@@ -3,6 +3,7 @@ version: 1.6
 author: Artemide
 api-version: 1.13
 main: it.artmistech.pathfinder.PathFinder
+softdepend: [Vault]
 commands:
   setspawn:
     usage: /setspawn
