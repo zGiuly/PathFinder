@@ -138,13 +138,14 @@ public class PathEconomy implements Economy {
     @Override
     public EconomyResponse withdrawPlayer(String s, double v) {
         try(PreparedStatement statement = database.getConnection().prepareStatement("UPDATE playerEconomy SET balance = ? WHERE name = ?")) {
-            double balance = getBalance(s)-v;
+            double oldBalance = getBalance(s);
+            double balance = oldBalance-v;
             statement.setDouble(1, balance);
             statement.setString(2, s);
 
             statement.executeUpdate();
 
-            return new EconomyResponse(v, getBalance(s), EconomyResponse.ResponseType.SUCCESS, "");
+            return new EconomyResponse(v, oldBalance, EconomyResponse.ResponseType.SUCCESS, "");
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -169,13 +170,14 @@ public class PathEconomy implements Economy {
     @Override
     public EconomyResponse depositPlayer(String s, double v) {
         try(PreparedStatement statement = database.getConnection().prepareStatement("UPDATE playerEconomy SET balance = ? WHERE name = ?")) {
-            double balance = getBalance(s)+v;
+            double oldBalance = getBalance(s);
+            double balance = oldBalance+v;
             statement.setDouble(1, balance);
             statement.setString(2, s);
 
             statement.executeUpdate();
 
-            return new EconomyResponse(v, getBalance(s), EconomyResponse.ResponseType.SUCCESS, "");
+            return new EconomyResponse(v, oldBalance, EconomyResponse.ResponseType.SUCCESS, "");
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -259,9 +261,11 @@ public class PathEconomy implements Economy {
 
     @Override
     public boolean createPlayerAccount(String s) {
-        try(PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO playerEconomy (?,?)")) {
+        try(PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO playerEconomy VALUES (?,?)")) {
             statement.setString(1, s);
             statement.setDouble(2, 0.0);
+
+            statement.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,8 @@ package it.artmistech.pathfinder.listeners;
 
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.interfaces.GetConfig;
+import it.artmistech.pathfinder.sqlite.Database;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 
@@ -116,6 +118,14 @@ public abstract class AbstractListener implements Listener, GetConfig {
             }
         }
         return pathFinder.getConfig().getBoolean(path);
+    }
+
+    public Database getDatabase() {
+        return pathFinder.getDefaultDatabase();
+    }
+
+    public Economy getEconomy() {
+        return pathFinder.getEconomy();
     }
 
 

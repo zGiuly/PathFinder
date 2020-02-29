@@ -3,6 +3,7 @@ package it.artmistech.pathfinder.commands;
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.enums.SenderEnum;
 import it.artmistech.pathfinder.interfaces.GetConfig;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -126,6 +127,10 @@ public abstract class AbstractCommand implements CommandExecutor, GetConfig {
      */
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        if(!(commandSender instanceof ConsoleCommandSender)) {
+            createAccountIfNotExist(commandSender);
+        }
+
         switch (sender) {
             case PLAYER:
                 if(commandSender instanceof Player) {
@@ -164,5 +169,19 @@ public abstract class AbstractCommand implements CommandExecutor, GetConfig {
 
     public PathFinder getPathFinder() {
         return pathFinder;
+    }
+
+    public Economy getEconomy() {
+        return pathFinder.getEconomy();
+    }
+
+    /**
+     * Create a economy account
+     * @param sender
+     */
+    private void createAccountIfNotExist(CommandSender sender) {
+        if(!getEconomy().hasAccount(sender.getName())) {
+            getEconomy().createPlayerAccount(sender.getName());
+        }
     }
 }

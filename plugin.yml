@@ -1,9 +1,9 @@
 name: PathFinder
-version: 1.6
+version: 1.7
 author: Artemide
 api-version: 1.13
 main: it.artmistech.pathfinder.PathFinder
-softdepend: [Vault]
+depend: [Vault]
 commands:
   setspawn:
     usage: /setspawn
@@ -110,3 +110,12 @@ commands:
     usage: /nick (name)
     permission: pathfinder.nick
     permission-message: §cYou do not have <permission> permission
+  balance:
+    usage: /balance (name)
+    permission: pathfinder.balance
+    permission-message: §cYou do not have <permission> permission
+  economy:
+    usage: /economy (name) (type) (value)
+    permission: pathfinder.economy
+    permission-message: §cYou do not have <permission> permission
+    aliases: [eco]

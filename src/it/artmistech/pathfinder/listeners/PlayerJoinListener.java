@@ -20,4 +20,13 @@ public class PlayerJoinListener extends AbstractListener {
         event.getPlayer().setCustomName(newName);
         event.getPlayer().setPlayerListName(newName);
     }
+
+
+    @EventHandler
+    public void setBalance(PlayerJoinEvent event) {
+        if(getEconomy().hasAccount(event.getPlayer())) return;
+
+        getEconomy().createPlayerAccount(event.getPlayer());
+        getEconomy().depositPlayer(event.getPlayer(), configDouble("economy.start-balance"));
+    }
 }

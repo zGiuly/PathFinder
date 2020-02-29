@@ -1,6 +1,8 @@
 package it.artmistech.pathfinder;
 
 import it.artmistech.pathfinder.commands.core.*;
+import it.artmistech.pathfinder.commands.economy.BalanceCommand;
+import it.artmistech.pathfinder.commands.economy.EconomyCommand;
 import it.artmistech.pathfinder.commands.fun.KittyCannonCommand;
 import it.artmistech.pathfinder.commands.fun.ThorCommand;
 import it.artmistech.pathfinder.commands.staff.*;
@@ -17,14 +19,11 @@ import it.artmistech.pathfinder.updater.UpdateCheck;
 import it.artmistech.pathfinder.utils.DatabaseUtils;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 public class PathFinder extends JavaPlugin {
     private PluginFile baseConfig;
@@ -82,6 +81,7 @@ public class PathFinder extends JavaPlugin {
             sendConsoleMessage("Vault not found");
         } else {
             findVault = true;
+            PathEconomy pathEconomy = new PathEconomy(defaultDatabase);
 
             if (!getConfig().getBoolean("economy.use-economy")) {
                 RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
@@ -89,17 +89,15 @@ public class PathFinder extends JavaPlugin {
                 if (rsp == null) {
                     sendConsoleMessage("Economy not found, use plugin economy");
 
-                    PathEconomy pathEconomy = new PathEconomy(defaultDatabase);
-
                     Bukkit.getServicesManager().register(Economy.class, pathEconomy, vault, ServicePriority.Normal);
 
                     economy = pathEconomy;
                     return;
                 }
-
                 economy = rsp.getProvider();
             } else {
-                Bukkit.getServicesManager().register(Economy.class, new PathEconomy(defaultDatabase), vault, ServicePriority.Normal);
+                Bukkit.getServicesManager().register(Economy.class, pathEconomy, vault, ServicePriority.Normal);
+                economy = pathEconomy;
             }
         }
     }
@@ -133,6 +131,8 @@ public class PathFinder extends JavaPlugin {
         new TphereCommand(this);
         new RandomTpCommand(this);
         new NickCommand(this);
+        new BalanceCommand(this);
+        new EconomyCommand(this);
     }
 
     private void setupEvents() {
