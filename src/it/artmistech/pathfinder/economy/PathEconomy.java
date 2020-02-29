@@ -137,12 +137,23 @@ public class PathEconomy implements Economy {
 
     @Override
     public EconomyResponse withdrawPlayer(String s, double v) {
-        return null;
+        try(PreparedStatement statement = database.getConnection().prepareStatement("UPDATE playerEconomy SET balance = ? WHERE name = ?")) {
+            double balance = getBalance(s)-v;
+            statement.setDouble(1, balance);
+            statement.setString(2, s);
+
+            statement.executeUpdate();
+
+            return new EconomyResponse(v, getBalance(s), EconomyResponse.ResponseType.SUCCESS, "");
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new EconomyResponse(v, getBalance(s), EconomyResponse.ResponseType.FAILURE, "Database error");
     }
 
     @Override
     public EconomyResponse withdrawPlayer(OfflinePlayer offlinePlayer, double v) {
-        return null;
+        return withdrawPlayer(offlinePlayer.getName(), v);
     }
 
     @Override
@@ -157,12 +168,23 @@ public class PathEconomy implements Economy {
 
     @Override
     public EconomyResponse depositPlayer(String s, double v) {
-        return null;
+        try(PreparedStatement statement = database.getConnection().prepareStatement("UPDATE playerEconomy SET balance = ? WHERE name = ?")) {
+            double balance = getBalance(s)+v;
+            statement.setDouble(1, balance);
+            statement.setString(2, s);
+
+            statement.executeUpdate();
+
+            return new EconomyResponse(v, getBalance(s), EconomyResponse.ResponseType.SUCCESS, "");
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new EconomyResponse(v, getBalance(s), EconomyResponse.ResponseType.FAILURE, "Database error");
     }
 
     @Override
     public EconomyResponse depositPlayer(OfflinePlayer offlinePlayer, double v) {
-        return null;
+        return depositPlayer(offlinePlayer.getName(), v);
     }
 
     @Override
@@ -237,12 +259,18 @@ public class PathEconomy implements Economy {
 
     @Override
     public boolean createPlayerAccount(String s) {
+        try(PreparedStatement statement = database.getConnection().prepareStatement("INSERT INTO playerEconomy (?,?)")) {
+            statement.setString(1, s);
+            statement.setDouble(2, 0.0);
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean createPlayerAccount(OfflinePlayer offlinePlayer) {
-        return false;
+        return createPlayerAccount(offlinePlayer.getName());
     }
 
     @Override
