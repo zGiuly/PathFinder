@@ -66,6 +66,7 @@ public class PathFinder extends JavaPlugin {
         try {
             defaultDatabase = new Database(getDataFolder(), "defaultData.db");
             DatabaseUtils.createDefaultNicknameTable(defaultDatabase);
+            DatabaseUtils.createDefaultEconomyTable(defaultDatabase);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             Bukkit.getPluginManager().disablePlugin(this);
@@ -88,7 +89,7 @@ public class PathFinder extends JavaPlugin {
                 if (rsp == null) {
                     sendConsoleMessage("Economy not found, use plugin economy");
 
-                    PathEconomy pathEconomy = new PathEconomy();
+                    PathEconomy pathEconomy = new PathEconomy(defaultDatabase);
 
                     Bukkit.getServicesManager().register(Economy.class, pathEconomy, vault, ServicePriority.Normal);
 
@@ -98,7 +99,7 @@ public class PathFinder extends JavaPlugin {
 
                 economy = rsp.getProvider();
             } else {
-                Bukkit.getServicesManager().register(Economy.class, new PathEconomy(), vault, ServicePriority.Normal);
+                Bukkit.getServicesManager().register(Economy.class, new PathEconomy(defaultDatabase), vault, ServicePriority.Normal);
             }
         }
     }

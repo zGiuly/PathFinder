@@ -23,4 +23,21 @@ public class DatabaseUtils {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Create default table for economy
+     * @param database
+     */
+    public static void createDefaultEconomyTable(@Nonnull Database database) {
+        String tableCreation = "CREATE TABLE IF NOT EXISTS playerEconomy (\n" +
+                " name TEXT NOT NULL,\n" +
+                " balance DOUBLE NOT NULL\n" +
+                ");";
+
+        try(PreparedStatement statement = database.getConnection().prepareStatement(tableCreation)) {
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,20 +1,30 @@
 package it.artmistech.pathfinder.economy;
 
+import it.artmistech.pathfinder.sqlite.Database;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.OfflinePlayer;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class PathEconomy implements Economy {
+    private final Database database;
+
+    public PathEconomy(Database database) {
+        this.database = database;
+    }
+
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override
     public String getName() {
-        return null;
+        return "PathFinder Economy";
     }
 
     @Override
@@ -44,12 +54,23 @@ public class PathEconomy implements Economy {
 
     @Override
     public boolean hasAccount(String s) {
+        try(PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM playerEconomy WHERE name = ?")) {
+            statement.setString(1, s);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                return rs.getString("name") != null;
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean hasAccount(OfflinePlayer offlinePlayer) {
-        return false;
+        return hasAccount(offlinePlayer.getName());
     }
 
     @Override
@@ -64,12 +85,23 @@ public class PathEconomy implements Economy {
 
     @Override
     public double getBalance(String s) {
+        try(PreparedStatement statement = database.getConnection().prepareStatement("SELECT * FROM playerEconomy WHERE name = ?")) {
+            statement.setString(1, s);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                return rs.getDouble("balance");
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
     @Override
     public double getBalance(OfflinePlayer offlinePlayer) {
-        return 0;
+        return getBalance(offlinePlayer.getName());
     }
 
     @Override
@@ -84,12 +116,13 @@ public class PathEconomy implements Economy {
 
     @Override
     public boolean has(String s, double v) {
+        if(getBalance(s) >= v) return true;
         return false;
     }
 
     @Override
     public boolean has(OfflinePlayer offlinePlayer, double v) {
-        return false;
+        return has(offlinePlayer.getName(), v);
     }
 
     @Override
