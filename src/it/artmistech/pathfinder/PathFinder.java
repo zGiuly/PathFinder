@@ -38,7 +38,7 @@ public class PathFinder extends JavaPlugin {
         setupEvents();
         setupDatabase();
         setupEconomy();
-        setupIgnoredUsers();
+        //setupIgnoredUsers();
 
 
         sendConsoleMessage("§aPathFinder enabled!\n§4Made by Artemide");
@@ -157,7 +157,7 @@ public class PathFinder extends JavaPlugin {
     }
 
     public void saveAll() {
-        IgnoredUtils.saveOnDatabase(defaultDatabase);
+        //IgnoredUtils.saveOnDatabase(defaultDatabase);
 
         Bukkit.getPluginManager().disablePlugin(this);
         Bukkit.getPluginManager().enablePlugin(this);
