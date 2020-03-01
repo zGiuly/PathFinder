@@ -36,7 +36,7 @@ public class ItemBlacklistCommand extends AbstractCommand {
 
                     if (material == null) return;
 
-                    blockBlacklist.put(player.getName(), Collections.singletonList(blockType));
+                    blockBlacklist.put(player.getName(), Arrays.asList(blockType));
                 } else {
                     String blockType = strings[1].toUpperCase();
                     Material material = null;
