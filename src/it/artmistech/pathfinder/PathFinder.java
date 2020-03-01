@@ -4,6 +4,7 @@ import it.artmistech.pathfinder.commands.core.*;
 import it.artmistech.pathfinder.commands.economy.BalanceCommand;
 import it.artmistech.pathfinder.commands.economy.EconomyCommand;
 import it.artmistech.pathfinder.commands.fun.KittyCannonCommand;
+import it.artmistech.pathfinder.commands.fun.NukeCommand;
 import it.artmistech.pathfinder.commands.fun.ThorCommand;
 import it.artmistech.pathfinder.commands.staff.*;
 import it.artmistech.pathfinder.commands.teleport.*;
@@ -132,6 +133,7 @@ public class PathFinder extends JavaPlugin {
         new ItemBlacklistCommand(this);
         new TpaAcceptCommand(this);
         new TpaDenyCommand(this);
+        new NukeCommand(this);
     }
 
     private void setupEvents() {
@@ -151,6 +153,7 @@ public class PathFinder extends JavaPlugin {
         new GodModeListener(this);
         new PlayerJoinListener(this);
         new ItemBlacklistListener(this);
+        new NukeProtectionListener(this);
     }
 
     public void saveAll() {

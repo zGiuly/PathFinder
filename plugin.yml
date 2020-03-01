@@ -130,3 +130,6 @@ commands:
   tpadeny:
     permission: pathfinder.tpadeny
     permission-message: §cYou do not have <permission> permission
+  nuke:
+    permission: pathfinder.nuke
+    permission-message: §cYou do not have <permission> permission
