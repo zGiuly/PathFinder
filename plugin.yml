@@ -120,3 +120,6 @@ commands:
     permission: pathfinder.economy
     permission-message: §cYou do not have <permission> permission
     aliases: [eco]
+  pickup:
+    permission: pathfinder.pickup
+    permission-message: §cYou do not have <permission> permission
