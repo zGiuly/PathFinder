@@ -15,11 +15,11 @@ public class TpaAcceptCommand extends AbstractCommand {
 
     @Override
     public void execute(CommandSender sender, String[] strings) {
-        if(!sender.hasPermission("pathfinder.tpaccept")) return;
+        if (!sender.hasPermission("pathfinder.tpaccept")) return;
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(TpaCommand.getCooldown().get(player.getName()) == 0) {
+        if (!TpaCommand.getCooldown().containsKey(player.getName())) {
             player.sendMessage("§cYou currently have no request");
             return;
         }
@@ -33,7 +33,7 @@ public class TpaAcceptCommand extends AbstractCommand {
 
         CustomLocation location = CustomLocation.fromLocation(target.getLocation());
 
-        if(!location.isSafe()) {
+        if (!location.isSafe()) {
             player.sendMessage("§cLocation is unsafe");
             target.sendMessage("§cLocation is unsafe");
             return;

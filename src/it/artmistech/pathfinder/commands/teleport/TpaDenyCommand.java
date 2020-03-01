@@ -15,11 +15,11 @@ public class TpaDenyCommand extends AbstractCommand {
 
     @Override
     public void execute(CommandSender sender, String[] strings) {
-        if(!sender.hasPermission("pathfinder.deny")) return;
+        if (!sender.hasPermission("pathfinder.deny")) return;
 
-        Player player = (Player)sender;
+        Player player = (Player) sender;
 
-        if(TpaCommand.getCooldown().get(player.getName()) == 0) {
+        if (!TpaCommand.getCooldown().containsKey(player.getName())) {
             player.sendMessage("§cYou currently have no request");
             return;
         }

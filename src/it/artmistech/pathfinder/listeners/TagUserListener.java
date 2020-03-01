@@ -12,13 +12,16 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class TagUserListener extends AbstractListener {
+    private final String format;
+
     public TagUserListener(PathFinder pathFinder) {
         super(pathFinder);
+        format = configString("tag.format");
     }
 
     @EventHandler
     public void playerTagChat(AsyncPlayerChatEvent event) {
-        if(!event.getPlayer().hasPermission("pathfinder.tag")) return;
+        if (!event.getPlayer().hasPermission("pathfinder.tag")) return;
 
         String message = event.getMessage();
         String[] data = null;
@@ -30,9 +33,9 @@ public class TagUserListener extends AbstractListener {
 
             String name = data[1];
 
-            if(name.equals(event.getPlayer().getName())) return;
+            if (name.equals(event.getPlayer().getName())) return;
 
-            message = message.replace("@"+name, "");
+            message = message.replace("@" + name, "");
 
             Player target = Bukkit.getPlayerExact(name);
 
@@ -42,10 +45,10 @@ public class TagUserListener extends AbstractListener {
                 return;
             }
 
-            event.setFormat(configString("tag.format")
-            .replaceAll("%p", event.getPlayer().getName())
-            .replaceAll("%text", message)
-            .replaceAll("%tag", "@"+name));
+            event.setFormat(
+                    format.replaceAll("%p", event.getPlayer().getName())
+                            .replaceAll("%text", message)
+                            .replaceAll("%tag", "@" + name));
 
             target.sendMessage(configString("tag.mention-message").replaceAll("%p", event.getPlayer().getName()));
             target.playSound(target.getLocation(), Sound.valueOf(configString("tag.mention-sound")), 5, 5);

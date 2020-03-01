@@ -28,14 +28,14 @@ public class TpaCommand extends AbstractCommand {
 
         asyncTask = Bukkit.getScheduler().runTaskTimerAsynchronously(getPathFinder(), () -> {
             try {
-                long now = System.currentTimeMillis()/1000;
+                long now = System.currentTimeMillis() / 1000;
 
                 cooldown.forEach((player, executionSeconds) -> {
-                    if(now-executionSeconds>=maxTime) {
+                    if (now - executionSeconds >= maxTime) {
                         Player target = Bukkit.getPlayerExact(inProgress.get(player));
                         Player executor = Bukkit.getPlayerExact(player);
 
-                        if(target != null && executor != null) {
+                        if (target != null && executor != null) {
                             target.sendMessage("§cTime expired to accept the tpa");
                             executor.sendMessage("§cTime expired to accept the tpa");
                         }
@@ -44,7 +44,7 @@ public class TpaCommand extends AbstractCommand {
                         inProgress.remove(player);
                     }
                 });
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }, 0, 60);
@@ -55,13 +55,13 @@ public class TpaCommand extends AbstractCommand {
         Player player = (Player) sender;
         if (!player.hasPermission("pathfinder.tpa")) return;
 
-        if(cooldown.get(player.getName()) != 0) {
+        if (cooldown.containsKey(player.getName())) {
             player.sendMessage("§cYour previous request has not yet expired");
             return;
         }
 
-        if(strings.length == 1) {
-            if(strings[0].equals(player.getName())) return;
+        if (strings.length == 1) {
+            if (strings[0].equals(player.getName())) return;
             Player target = Bukkit.getPlayerExact(strings[0]);
 
             if (target == null || !target.isOnline()) {
@@ -70,10 +70,10 @@ public class TpaCommand extends AbstractCommand {
             }
 
             player.sendMessage("§aTpa request sent");
-            target.sendMessage("§aYou have a tpa request from §e" + player.getName() + " §athis will expire in "+ maxTime +" seconds");
+            target.sendMessage("§aYou have a tpa request from §e" + player.getName() + " §athis will expire in " + maxTime + " seconds");
 
             inProgress.put(player.getName(), strings[0]);
-            cooldown.put(player.getName(), System.currentTimeMillis()/1000);
+            cooldown.put(player.getName(), System.currentTimeMillis() / 1000);
         }
     }
 

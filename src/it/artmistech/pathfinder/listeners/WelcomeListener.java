@@ -9,8 +9,21 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class WelcomeListener extends AbstractListener {
+    private final String welcomeMessage;
+    private final String welcomeTitle;
+    private final String welcomeSubtitle;
+    private final String globalWelcomeMessage;
+
+    private final boolean globalWelcome;
+
     public WelcomeListener(PathFinder pathFinder) {
         super(pathFinder);
+        welcomeMessage = ChatColor.translateAlternateColorCodes('&', configString("welcome-message"));
+        welcomeTitle = ChatColor.translateAlternateColorCodes('&', configString("welcome-title"));
+        welcomeSubtitle = ChatColor.translateAlternateColorCodes('&', configString("welcome-subtitle"));
+        globalWelcomeMessage = ChatColor.translateAlternateColorCodes('&', configString("global-welcome-message"));
+
+        globalWelcome = configBoolean("global-welcome");
     }
 
     @EventHandler
@@ -18,22 +31,15 @@ public class WelcomeListener extends AbstractListener {
         if (configBoolean("disable-welcome")) return;
         event.setJoinMessage(null);
 
-        String welcomeMessage = ChatColor.translateAlternateColorCodes('&', configString("welcome-message")).replaceAll("%p", event.getPlayer().getName());
-        String welcomeTitle = ChatColor.translateAlternateColorCodes('&', configString("welcome-title")).replaceAll("%p", event.getPlayer().getName());
-        String welcomeSubtitle = ChatColor.translateAlternateColorCodes('&', configString("welcome-subtitle")).replaceAll("%p", event.getPlayer().getName());
-        String globalWelcomeMessage = ChatColor.translateAlternateColorCodes('&', configString("global-welcome-message")).replaceAll("%p", event.getPlayer().getName());
+        event.getPlayer().sendMessage(welcomeMessage.replaceAll("%p", event.getPlayer().getName()));
 
-        boolean globalWelcome = configBoolean("global-welcome");
-
-        event.getPlayer().sendMessage(welcomeMessage);
-
-        if(!welcomeTitle.isEmpty() && !welcomeSubtitle.isEmpty()) {
-            TitleUtils.send(event.getPlayer(), welcomeTitle, welcomeSubtitle, 0, 60, 10);
+        if (!welcomeTitle.isEmpty() && !welcomeSubtitle.isEmpty()) {
+            TitleUtils.send(event.getPlayer(), welcomeTitle.replaceAll("%p", event.getPlayer().getName()), welcomeSubtitle.replaceAll("%p", event.getPlayer().getName()), 0, 60, 10);
         }
 
-        if(globalWelcome) {
+        if (globalWelcome) {
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                onlinePlayer.sendMessage(globalWelcomeMessage);
+                onlinePlayer.sendMessage(globalWelcomeMessage.replaceAll("%p", event.getPlayer().getName()));
             }
         }
     }
