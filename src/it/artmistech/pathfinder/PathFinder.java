@@ -6,10 +6,7 @@ import it.artmistech.pathfinder.commands.economy.EconomyCommand;
 import it.artmistech.pathfinder.commands.fun.KittyCannonCommand;
 import it.artmistech.pathfinder.commands.fun.ThorCommand;
 import it.artmistech.pathfinder.commands.staff.*;
-import it.artmistech.pathfinder.commands.teleport.RandomTpCommand;
-import it.artmistech.pathfinder.commands.teleport.TpaCommand;
-import it.artmistech.pathfinder.commands.teleport.TpallCommand;
-import it.artmistech.pathfinder.commands.teleport.TphereCommand;
+import it.artmistech.pathfinder.commands.teleport.*;
 import it.artmistech.pathfinder.economy.PathEconomy;
 import it.artmistech.pathfinder.listeners.*;
 import it.artmistech.pathfinder.io.PluginFile;
@@ -126,6 +123,8 @@ public class PathFinder extends JavaPlugin {
         new BalanceCommand(this);
         new EconomyCommand(this);
         new ItemBlacklistCommand(this);
+        new TpaAcceptCommand(this);
+        new TpaDenyCommand(this);
     }
 
     private void setupEvents() {

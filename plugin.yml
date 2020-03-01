@@ -121,5 +121,12 @@ commands:
     permission-message: §cYou do not have <permission> permission
     aliases: [eco]
   pickup:
+    usage: /pickup (blockname)
     permission: pathfinder.pickup
+    permission-message: §cYou do not have <permission> permission
+  tpaccept:
+    permission: pathfinder.tpaccept
+    permission-message: §cYou do not have <permission> permission
+  tpadeny:
+    permission: pathfinder.tpadeny
     permission-message: §cYou do not have <permission> permission

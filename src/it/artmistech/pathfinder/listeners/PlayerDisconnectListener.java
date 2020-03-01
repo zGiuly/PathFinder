@@ -4,6 +4,7 @@ import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.staff.FollowCommand;
 import it.artmistech.pathfinder.commands.staff.FreezeCommand;
 import it.artmistech.pathfinder.commands.staff.StaffChatCommand;
+import it.artmistech.pathfinder.commands.teleport.TpaCommand;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -16,7 +17,7 @@ public class PlayerDisconnectListener extends AbstractListener {
         super(pathFinder);
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler
     public void playerDisconnect(PlayerQuitEvent event) {
         for (Map.Entry<String, String> stringStringEntry : FollowCommand.getPassengers().entrySet()) {
             Map.Entry item = (Map.Entry) stringStringEntry;
@@ -29,6 +30,7 @@ public class PlayerDisconnectListener extends AbstractListener {
 
         disconnectStaffChat(event.getPlayer().getName());
         disconnectControlledPlayer(event.getPlayer().getName());
+        disconnectTpa(event.getPlayer().getName());
     }
 
     private void disconnectStaffChat(String name) {
@@ -37,5 +39,10 @@ public class PlayerDisconnectListener extends AbstractListener {
 
     private void disconnectControlledPlayer(String name) {
         FreezeCommand.getFreezedPlayers().remove(name);
+    }
+
+    private void disconnectTpa(String name) {
+        TpaCommand.getInProgress().remove(name);
+        TpaCommand.getCooldown().remove(name);
     }
 }

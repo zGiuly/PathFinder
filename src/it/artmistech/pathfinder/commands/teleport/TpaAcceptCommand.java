@@ -26,14 +26,21 @@ public class TpaAcceptCommand extends AbstractCommand {
 
         Player target = Bukkit.getPlayerExact(TpaCommand.getInProgress().get(player.getName()));
 
-        if(target == null || !target.isOnline()) {
+        if (target == null || !target.isOnline()) {
+            player.sendMessage("§cPlayer offline!");
             return;
         }
 
         CustomLocation location = CustomLocation.fromLocation(target.getLocation());
 
-        if(!location.isSafe()) return;
+        if(!location.isSafe()) {
+            player.sendMessage("§cLocation is unsafe");
+            target.sendMessage("§cLocation is unsafe");
+            return;
+        }
 
         player.teleport(location);
+        TpaCommand.getCooldown().remove(player.getName());
+        TpaCommand.getInProgress().remove(player.getName());
     }
 }

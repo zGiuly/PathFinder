@@ -29,10 +29,9 @@ public class TpaCommand extends AbstractCommand {
         asyncTask = Bukkit.getScheduler().runTaskTimerAsynchronously(getPathFinder(), () -> {
             try {
                 long now = System.currentTimeMillis()/1000;
-                long max = now+maxTime;
 
                 cooldown.forEach((player, executionSeconds) -> {
-                    if(now>max) {
+                    if(now-executionSeconds>=maxTime) {
                         Player target = Bukkit.getPlayerExact(inProgress.get(player));
                         Player executor = Bukkit.getPlayerExact(player);
 
@@ -70,8 +69,11 @@ public class TpaCommand extends AbstractCommand {
                 return;
             }
 
+            player.sendMessage("§aTpa request sent");
+            target.sendMessage("§aYou have a tpa request from §e" + player.getName() + " §athis will expire in "+ maxTime +" seconds");
+
             inProgress.put(player.getName(), strings[0]);
-            cooldown.put(player.getName(), System.currentTimeMillis());
+            cooldown.put(player.getName(), System.currentTimeMillis()/1000);
         }
     }
 
