@@ -33,6 +33,7 @@ commands:
     usage: /gamemode (gamemode) (name)
     permission: pathfinder.gamemode
     permission-message: §cYou do not have <permission> permission
+    aliases: [gm]
   tphere:
     usage: /tphere (player)
     permission: pathfinder.tphere

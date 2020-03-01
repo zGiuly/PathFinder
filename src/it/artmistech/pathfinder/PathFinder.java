@@ -125,6 +125,7 @@ public class PathFinder extends JavaPlugin {
         new NickCommand(this);
         new BalanceCommand(this);
         new EconomyCommand(this);
+        new ItemBlacklistCommand(this);
     }
 
     private void setupEvents() {
@@ -143,6 +144,7 @@ public class PathFinder extends JavaPlugin {
         new WelcomeListener(this);
         new GodModeListener(this);
         new PlayerJoinListener(this);
+        new ItemBlacklistListener(this);
     }
 
     public void saveAllConfig() {

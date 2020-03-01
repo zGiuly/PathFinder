@@ -12,27 +12,28 @@ public class SpawnListener extends AbstractListener {
 
     public SpawnListener(PathFinder pathFinder) {
         super(pathFinder);
+        setupSpawnLocation();
     }
 
     @EventHandler
     public void playerJoinSpawn(PlayerJoinEvent event) {
 
-        if(spawnLocation == null) {
-            if (!configString("spawn.world").isEmpty()) return;
-
-            World world = Bukkit.getWorld(configString("spawn.world"));
-            double x = configDouble("spawn.x");
-            double y = configDouble("spawn.y");
-            double z = configDouble("spawn.z");
-            float yaw = configInt("spawn.yaw");
-
-            spawnLocation = new CustomLocation(world, x, y, z, yaw, 0);
-        }
+        if(spawnLocation == null) return;
 
         if (spawnLocation.isSafe() && configBoolean("spawn-every-join")) {
             event.getPlayer().teleport(spawnLocation);
         } else if (!spawnLocation.isSafe()) {
             event.getPlayer().sendMessage("§4Spawn location is unsafe!\n§4Contact the admin for fix this");
         }
+    }
+
+    private void setupSpawnLocation() {
+        World world = Bukkit.getWorld(configString("spawn.world"));
+        double x = configDouble("spawn.x");
+        double y = configDouble("spawn.y");
+        double z = configDouble("spawn.z");
+        float yaw = configInt("spawn.yaw");
+
+        spawnLocation = new CustomLocation(world, x, y, z, yaw, 0);
     }
 }

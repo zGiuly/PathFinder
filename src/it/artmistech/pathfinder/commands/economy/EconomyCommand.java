@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class EconomyCommand extends AbstractCommand {
     protected enum CommandTypes {
-        SET, REMOVE, ADD, GIVE
+        SET, REMOVE, ADD
     }
 
 
@@ -26,8 +26,8 @@ public class EconomyCommand extends AbstractCommand {
         if (strings.length == 3) {
             CommandTypes commandTypes = null;
             try {
-               commandTypes = CommandTypes.valueOf(strings[1].toUpperCase());
-            }catch (Exception e) {
+                commandTypes = CommandTypes.valueOf(strings[1].toUpperCase());
+            } catch (Exception e) {
                 player.sendMessage("§cError");
                 return;
             }
@@ -52,19 +52,22 @@ public class EconomyCommand extends AbstractCommand {
                     getEconomy().depositPlayer(target, value);
 
                     player.sendMessage("§aMoney set!");
-                case GIVE:
-                    player.sendMessage("§aStart give...");
-                    Bukkit.getScheduler().runTaskAsynchronously(getPathFinder(), () -> {
-                        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-                            getEconomy().depositPlayer(onlinePlayer, value);
-                        }
-                        player.sendMessage("§aTask completed!");
-                    });
-                    break;
                 case REMOVE:
                     getEconomy().withdrawPlayer(target, value);
-
                     player.sendMessage("§aMoney removed!");
+                default:
+                    break;
+            }
+        } else if(strings.length == 2) {
+            double value = Double.parseDouble(strings[1]);
+            if(strings[0].equalsIgnoreCase("give")) {
+                player.sendMessage("§aStart give...");
+                Bukkit.getScheduler().runTaskAsynchronously(getPathFinder(), () -> {
+                    for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+                        getEconomy().depositPlayer(onlinePlayer, value);
+                    }
+                    player.sendMessage("§aTask completed!");
+                });
             }
         }
     }
