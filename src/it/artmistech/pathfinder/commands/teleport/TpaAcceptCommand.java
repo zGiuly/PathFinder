@@ -8,6 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 public class TpaAcceptCommand extends AbstractCommand {
     public TpaAcceptCommand(PathFinder pathFinder) {
         super(SenderEnum.PLAYER, pathFinder, "tpaccept");
@@ -19,19 +21,27 @@ public class TpaAcceptCommand extends AbstractCommand {
 
         Player player = (Player) sender;
 
-        if (!TpaCommand.getCooldown().containsKey(player.getName())) {
+        if (!TpaCommand.getInProgress().containsValue(player.getName())) {
             player.sendMessage("§cYou currently have no request");
             return;
         }
 
-        Player target = Bukkit.getPlayerExact(TpaCommand.getInProgress().get(player.getName()));
+        final String[] executorName = {null};
+
+        TpaCommand.getInProgress().forEach((executor, target) -> {
+            if(target.equals(player.getName())) {
+                executorName[0] = executor;
+            }
+        });
+
+        Player target = Bukkit.getPlayerExact(executorName[0]);
 
         if (target == null || !target.isOnline()) {
             player.sendMessage("§cPlayer offline!");
             return;
         }
 
-        CustomLocation location = CustomLocation.fromLocation(target.getLocation());
+        CustomLocation location = CustomLocation.fromLocation(player.getLocation());
 
         if (!location.isSafe()) {
             player.sendMessage("§cLocation is unsafe");
@@ -39,8 +49,9 @@ public class TpaAcceptCommand extends AbstractCommand {
             return;
         }
 
-        player.teleport(location);
-        TpaCommand.getCooldown().remove(player.getName());
-        TpaCommand.getInProgress().remove(player.getName());
+        target.teleport(location);
+
+        TpaCommand.getCooldown().remove(target.getName());
+        TpaCommand.getInProgress().remove(target.getName());
     }
 }

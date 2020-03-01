@@ -1,5 +1,6 @@
 package it.artmistech.pathfinder.utils;
 
+import com.mysql.fabric.xmlrpc.base.Data;
 import it.artmistech.pathfinder.sqlite.Database;
 
 import javax.annotation.Nonnull;
@@ -32,6 +33,23 @@ public class DatabaseUtils {
         String tableCreation = "CREATE TABLE IF NOT EXISTS playerEconomy (\n" +
                 " name TEXT NOT NULL,\n" +
                 " balance DOUBLE NOT NULL\n" +
+                ");";
+
+        try(PreparedStatement statement = database.getConnection().prepareStatement(tableCreation)) {
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Create default table for ignored users
+     * @param database
+     */
+    public static void createDefaultIgnoreTable(@Nonnull Database database) {
+        String tableCreation = "CREATE TABLE IF NOT EXISTS playerIgnore (\n" +
+                " name TEXT NOT NULL,\n" +
+                " ignoredUsers ARRAY NOT NULL\n" +
                 ");";
 
         try(PreparedStatement statement = database.getConnection().prepareStatement(tableCreation)) {

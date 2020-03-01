@@ -40,8 +40,10 @@ public class TpaCommand extends AbstractCommand {
                             executor.sendMessage("§cTime expired to accept the tpa");
                         }
 
-                        cooldown.remove(player);
-                        inProgress.remove(player);
+                        Bukkit.getScheduler().runTask(getPathFinder(), () -> {
+                            cooldown.remove(player);
+                            inProgress.remove(player);
+                        });
                     }
                 });
             } catch (Exception e) {
@@ -70,7 +72,7 @@ public class TpaCommand extends AbstractCommand {
             }
 
             player.sendMessage("§aTpa request sent");
-            target.sendMessage("§aYou have a tpa request from §e" + player.getName() + " §athis will expire in " + maxTime + " seconds");
+            target.sendMessage("§aYou have a tpa request from §e" + player.getName() + " §athis will expire in " + maxTime + " seconds\n§aUse command /tpaccept for accept the tpa request");
 
             inProgress.put(player.getName(), strings[0]);
             cooldown.put(player.getName(), System.currentTimeMillis() / 1000);

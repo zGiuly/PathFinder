@@ -18,7 +18,7 @@ public class ReloadCommand extends AbstractCommand {
 
             if(!player.hasPermission("pathfinder.reload")) return;
 
-            getPathFinder().saveAllConfig();
+            getPathFinder().saveAll();
 
             player.sendMessage("§aAll config saved and reloaded!");
         }

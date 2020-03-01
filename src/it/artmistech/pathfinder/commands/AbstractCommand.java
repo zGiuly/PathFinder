@@ -8,7 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 public abstract class AbstractCommand implements CommandExecutor, GetConfig {

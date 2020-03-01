@@ -8,6 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 public class TpaDenyCommand extends AbstractCommand {
     public TpaDenyCommand(PathFinder pathFinder) {
         super(SenderEnum.PLAYER, pathFinder, "tpadeny");
@@ -19,22 +21,30 @@ public class TpaDenyCommand extends AbstractCommand {
 
         Player player = (Player) sender;
 
-        if (!TpaCommand.getCooldown().containsKey(player.getName())) {
+        if (!TpaCommand.getInProgress().containsValue(player.getName())) {
             player.sendMessage("§cYou currently have no request");
             return;
         }
 
-        Player target = Bukkit.getPlayerExact(TpaCommand.getInProgress().get(player.getName()));
+        final String[] executorName = {null};
+
+        TpaCommand.getInProgress().forEach((executor, target) -> {
+            if(target.equals(player.getName())) {
+                executorName[0] = executor;
+            }
+        });
+
+        Player target = Bukkit.getPlayerExact(executorName[0]);
 
         if (target == null || !target.isOnline()) {
             player.sendMessage("§cPlayer offline!");
             return;
         }
 
-        target.sendMessage("§aTpa denied");
-        player.sendMessage("§cTpa denied");
+        target.sendMessage("§cTpa denied");
+        player.sendMessage("§aTpa denied");
 
-        TpaCommand.getInProgress().remove(player.getName());
-        TpaCommand.getCooldown().remove(player.getName());
+        TpaCommand.getInProgress().remove(target.getName());
+        TpaCommand.getCooldown().remove(target.getName());
     }
 }

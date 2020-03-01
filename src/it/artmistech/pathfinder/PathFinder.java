@@ -13,6 +13,7 @@ import it.artmistech.pathfinder.io.PluginFile;
 import it.artmistech.pathfinder.sqlite.Database;
 import it.artmistech.pathfinder.updater.UpdateCheck;
 import it.artmistech.pathfinder.utils.DatabaseUtils;
+import it.artmistech.pathfinder.utils.IgnoredUtils;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -36,6 +37,7 @@ public class PathFinder extends JavaPlugin {
         setupEvents();
         setupDatabase();
         setupEconomy();
+        setupIgnoredUsers();
 
 
         sendConsoleMessage("§aPathFinder enabled!\n§4Made by Artemide");
@@ -45,7 +47,7 @@ public class PathFinder extends JavaPlugin {
     public void onDisable() {
         sendConsoleMessage("§aPathFinder save all configs...");
 
-        saveAllConfig();
+        saveAll();
 
         sendConsoleMessage("§aPathFinder all saved..");
     }
@@ -60,10 +62,15 @@ public class PathFinder extends JavaPlugin {
             defaultDatabase = new Database(getDataFolder(), "defaultData.db");
             DatabaseUtils.createDefaultNicknameTable(defaultDatabase);
             DatabaseUtils.createDefaultEconomyTable(defaultDatabase);
+            DatabaseUtils.createDefaultIgnoreTable(defaultDatabase);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             Bukkit.getPluginManager().disablePlugin(this);
         }
+    }
+
+    private void setupIgnoredUsers() {
+        IgnoredUtils.setupHashMap(defaultDatabase);
     }
 
     private void setupEconomy() {
@@ -146,7 +153,9 @@ public class PathFinder extends JavaPlugin {
         new ItemBlacklistListener(this);
     }
 
-    public void saveAllConfig() {
+    public void saveAll() {
+        IgnoredUtils.saveOnDatabase(defaultDatabase);
+
         Bukkit.getPluginManager().disablePlugin(this);
         Bukkit.getPluginManager().enablePlugin(this);
     }
