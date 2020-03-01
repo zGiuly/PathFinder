@@ -36,7 +36,12 @@ public class ItemBlacklistCommand extends AbstractCommand {
 
                     if (material == null) return;
 
-                    blockBlacklist.put(player.getName(), Arrays.asList(blockType));
+                    List<String> blockList = new ArrayList<>();
+                    blockList.add(blockType);
+
+                    blockBlacklist.put(player.getName(), blockList);
+
+                    player.sendMessage("§aBlacklist updated");
                 } else {
                     String blockType = strings[1].toUpperCase();
                     Material material = null;
@@ -68,7 +73,6 @@ public class ItemBlacklistCommand extends AbstractCommand {
                     for (String s : blockBlacklist.get(player.getName())) {
                         if (s.equals(blockType)) {
                             find = true;
-                            blockBlacklist.get(player.getName()).remove(s);
                             break;
                         }
                     }
@@ -76,6 +80,8 @@ public class ItemBlacklistCommand extends AbstractCommand {
                     if (!find) {
                         player.sendMessage("§cNo value found");
                         return;
+                    } else {
+                        blockBlacklist.get(player.getName()).remove(blockType);
                     }
 
                     player.sendMessage("§aBlacklist updated");
