@@ -133,3 +133,11 @@ commands:
   nuke:
     permission: pathfinder.nuke
     permission-message: §cYou do not have <permission> permission
+  elevator:
+    use: /elevator (add, remove) (value)
+    permission: pathfinder.elevator
+    permission-message: §cYou do not have <permission> permission
+  humanspider:
+    use: /humanspider
+    permission: pathfinder.humanspider
+    permission-message: §cYou do not have <permission> permission

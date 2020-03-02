@@ -27,9 +27,13 @@ public class NukeProtectionListener extends AbstractListener {
             if(nearbyEntity instanceof LivingEntity) {
                 LivingEntity entity = (LivingEntity)nearbyEntity;
 
-                double health = entity.getHealth();
+                double health = entity.getHealth()-event.getYield();
 
-                entity.setHealth(health-event.getYield());
+                if(health<0) {
+                    entity.setHealth(0);
+                } else {
+                    entity.setHealth(health);
+                }
             }
         }
     }

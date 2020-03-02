@@ -3,6 +3,7 @@ package it.artmistech.pathfinder;
 import it.artmistech.pathfinder.commands.core.*;
 import it.artmistech.pathfinder.commands.economy.BalanceCommand;
 import it.artmistech.pathfinder.commands.economy.EconomyCommand;
+import it.artmistech.pathfinder.commands.fun.HumanSpiderCommand;
 import it.artmistech.pathfinder.commands.fun.KittyCannonCommand;
 import it.artmistech.pathfinder.commands.fun.NukeCommand;
 import it.artmistech.pathfinder.commands.fun.ThorCommand;
@@ -134,6 +135,8 @@ public class PathFinder extends JavaPlugin {
         new TpaAcceptCommand(this);
         new TpaDenyCommand(this);
         new NukeCommand(this);
+        new ElevatorCommand(this);
+        new HumanSpiderCommand(this);
     }
 
     private void setupEvents() {
@@ -154,6 +157,8 @@ public class PathFinder extends JavaPlugin {
         new PlayerJoinListener(this);
         new ItemBlacklistListener(this);
         new NukeProtectionListener(this);
+        new ElevatorActionsListener(this);
+        new SpiderControlListener(this);
     }
 
     public void saveAll() {
