@@ -39,11 +39,13 @@ public class ElevatorActionsListener extends AbstractListener {
 
                         CustomLocation location = CustomLocation.fromLocation(finalRedstone.getLocation().add(0, 1, 0));
 
-                        if(!location.isSafe()) return;
+                        if (!location.isSafe()) return;
 
                         Bukkit.getScheduler().runTask(getPathFinder(), () -> {
                             event.getPlayer().teleport(location);
                         });
+
+                        event.getPlayer().sendMessage("§aFloor up");
 
                         break;
                     }
@@ -71,15 +73,17 @@ public class ElevatorActionsListener extends AbstractListener {
                     if (redstone.getType() != Material.REDSTONE_BLOCK || i == 0) {
                         i++;
                     } else {
-                        Block finalRedstone = redstone;
 
-                        CustomLocation location = CustomLocation.fromLocation(finalRedstone.getLocation().add(0, 1, 0));
+                        CustomLocation location = CustomLocation.fromLocation(redstone.getLocation().add(0, 1, 0));
 
-                        if(!location.isSafe()) return;
+                        if (!location.isSafe()) return;
 
                         Bukkit.getScheduler().runTask(getPathFinder(), () -> {
                             event.getPlayer().teleport(location);
                         });
+
+                        event.getPlayer().sendMessage("§cFloor down");
+
                         break;
                     }
                 }

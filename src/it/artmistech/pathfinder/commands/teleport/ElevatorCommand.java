@@ -50,6 +50,8 @@ public class ElevatorCommand extends AbstractCommand {
                                 Bukkit.getScheduler().runTask(getPathFinder(), () -> {
                                     finalRedstone.setType(Material.AIR);
                                 });
+
+                                player.sendMessage("§cFloor removed");
                                 break;
                             }
                         }
@@ -74,6 +76,8 @@ public class ElevatorCommand extends AbstractCommand {
                                 Bukkit.getScheduler().runTask(getPathFinder(), () -> {
                                     finalRedstone.setType(Material.AIR);
                                 });
+
+                                player.sendMessage("§cFloor removed");
                                 break;
                             }
                         }

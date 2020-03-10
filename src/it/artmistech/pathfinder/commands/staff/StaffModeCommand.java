@@ -29,6 +29,8 @@ public class StaffModeCommand extends AbstractCommand {
         if(!playerInventory.containsKey(player.getName())) {
             player.getInventory().setContents(playerInventory.get(player.getName()).getContents());
             playerInventory.remove(player.getName());
+
+            player.sendMessage("§cStaffMode disabled");
         } else {
             playerInventory.put(player.getName(), player.getInventory());
             player.getInventory().clear();
@@ -36,6 +38,8 @@ public class StaffModeCommand extends AbstractCommand {
             for (ItemStack staffItem : StaffUtils.getStaffItems()) {
                 player.getInventory().addItem(staffItem);
             }
+
+            player.sendMessage("§aStaffMode enabled");
         }
     }
 }

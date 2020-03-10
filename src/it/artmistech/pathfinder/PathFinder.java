@@ -159,6 +159,7 @@ public class PathFinder extends JavaPlugin {
         new NukeProtectionListener(this);
         new ElevatorActionsListener(this);
         new SpiderControlListener(this);
+        new StaffChatListener(this);
     }
 
     public void saveAll() {
