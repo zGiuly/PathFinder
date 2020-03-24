@@ -50,6 +50,7 @@ gamemode:
 sign:
   #Allows you to color a sign
   colored-sign: true
+  warp: true
 
 #Staff chat section
 staff-chat:

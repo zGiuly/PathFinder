@@ -137,6 +137,7 @@ public class PathFinder extends JavaPlugin {
         new NukeCommand(this);
         new ElevatorCommand(this);
         new HumanSpiderCommand(this);
+        new StaffChatCommand(this);
     }
 
     private void setupEvents() {
@@ -160,6 +161,7 @@ public class PathFinder extends JavaPlugin {
         new ElevatorActionsListener(this);
         new SpiderControlListener(this);
         new StaffChatListener(this);
+        new StaffModeListener(this);
     }
 
     public void saveAll() {

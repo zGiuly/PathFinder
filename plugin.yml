@@ -141,3 +141,7 @@ commands:
     use: /humanspider
     permission: pathfinder.humanspider
     permission-message: §cYou do not have <permission> permission
+  staffmode:
+    use: /staffmode
+    permission: pathfinder.staffmode
+    permission-message: §cYou do not have <permission> permission
