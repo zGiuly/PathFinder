@@ -31,8 +31,6 @@ public class PathFinder extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        sendConsoleMessage("§aPathFinder " + getDescription().getVersion() + " enabling...");
-
         updateCheck();
         setupFiles();
         setupCommands();
@@ -40,18 +38,11 @@ public class PathFinder extends JavaPlugin {
         setupDatabase();
         setupEconomy();
         //setupIgnoredUsers();
-
-
-        sendConsoleMessage("§aPathFinder enabled!\n§4Made by Artemide");
     }
 
     @Override
     public void onDisable() {
-        sendConsoleMessage("§aPathFinder save all configs...");
-
-        saveAll();
-
-        sendConsoleMessage("§aPathFinder all saved..");
+        baseConfig.save();
     }
 
 
@@ -71,9 +62,11 @@ public class PathFinder extends JavaPlugin {
         }
     }
 
+    /*
     private void setupIgnoredUsers() {
         IgnoredUtils.setupHashMap(defaultDatabase);
     }
+    */
 
     private void setupEconomy() {
         Plugin vault = Bukkit.getPluginManager().getPlugin("Vault");

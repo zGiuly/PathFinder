@@ -17,6 +17,6 @@ public class WarpSignListener extends AbstractListener {
 
     @EventHandler
     public void signInteract(PlayerInteractEvent event) {
-        
+
     }
 }
