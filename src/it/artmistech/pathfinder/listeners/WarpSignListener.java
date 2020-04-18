@@ -13,6 +13,10 @@ public class WarpSignListener extends AbstractListener {
     @EventHandler
     public void signNameReplace(SignChangeEvent event) {
         if(!event.getPlayer().hasPermission("pathfinder.sign.warp.create")) return;
+
+        if(event.getLine(0).equalsIgnoreCase("[Warp]") && event.getLines().length == 2) {
+            
+        }
     }
 
     @EventHandler
