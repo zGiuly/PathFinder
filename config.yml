@@ -115,3 +115,9 @@ nickname:
 economy:
   start-balance: 100.0
   use-economy: true
+
+
+#Max lines of sign
+warp-sign-format:
+  - "&a[Warp]"
+  - "&e%warpname%"
