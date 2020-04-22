@@ -95,7 +95,7 @@ public class PathFinderUtils {
     }
 
     /**
-     * deault NSM
+     * default NMS
      * @param name
      * @return
      */
