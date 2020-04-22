@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.spigotmc.event.entity.EntityDismountEvent;
 
-import java.util.Iterator;
 import java.util.Map;
 
 public class PlayerEjectListener extends AbstractListener {

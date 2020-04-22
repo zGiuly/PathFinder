@@ -3,7 +3,6 @@ package it.artmistech.pathfinder.commands.fun;
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.AbstractCommand;
 import it.artmistech.pathfinder.enums.SenderEnum;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;

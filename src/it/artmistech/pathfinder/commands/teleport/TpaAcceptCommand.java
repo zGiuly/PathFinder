@@ -8,8 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 public class TpaAcceptCommand extends AbstractCommand {
     public TpaAcceptCommand(PathFinder pathFinder) {
         super(SenderEnum.PLAYER, pathFinder, "tpaccept");

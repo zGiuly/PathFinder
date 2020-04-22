@@ -2,14 +2,10 @@ package it.artmistech.pathfinder.listeners;
 
 import it.artmistech.pathfinder.PathFinder;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-
-import java.util.Arrays;
-import java.util.StringTokenizer;
 
 public class TagUserListener extends AbstractListener {
     private final String format;

@@ -6,7 +6,6 @@ import it.artmistech.pathfinder.enums.SenderEnum;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.*;
-import org.bukkit.util.Vector;
 
 public class KittyCannonCommand extends AbstractCommand {
     public KittyCannonCommand(PathFinder pathFinder) {

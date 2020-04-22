@@ -7,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -38,7 +37,7 @@ public class ControlledPlayerListener extends AbstractListener {
         String format = configString("freeze.controlled-format")
                 .replaceAll("%p", event.getPlayer().getName())
                 .replaceAll("%c", checker.getName())
-                .replaceAll("%text", event.getMessage());;
+                .replaceAll("%text", event.getMessage());
 
         checker.sendMessage(ChatColor.translateAlternateColorCodes('&', format));
         event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', format));

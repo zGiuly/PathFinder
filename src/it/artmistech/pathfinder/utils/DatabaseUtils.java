@@ -1,6 +1,5 @@
 package it.artmistech.pathfinder.utils;
 
-import com.mysql.fabric.xmlrpc.base.Data;
 import it.artmistech.pathfinder.sqlite.Database;
 
 import javax.annotation.Nonnull;

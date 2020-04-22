@@ -4,7 +4,7 @@ import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.AbstractCommand;
 import it.artmistech.pathfinder.enums.SenderEnum;
 import it.artmistech.pathfinder.types.CustomLocation;
-import it.artmistech.pathfinder.utils.LocationUtils;
+import it.artmistech.pathfinder.utils.PathFinderUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -51,7 +51,7 @@ public class WarpCommand extends AbstractCommand {
                     return;
                 }
 
-                CustomLocation warplocation = LocationUtils.extractLocation("warps." + warpName, getPathFinder().getBaseConfig());
+                CustomLocation warplocation = PathFinderUtils.extractLocation("warps." + warpName, getPathFinder().getBaseConfig());
 
 
                 if (configBoolean("warp.only-safe-location")) {
@@ -73,7 +73,7 @@ public class WarpCommand extends AbstractCommand {
                     return;
                 }
 
-                CustomLocation warplocation = LocationUtils.extractLocation("warps." + warpName, getPathFinder().getBaseConfig());
+                CustomLocation warplocation = PathFinderUtils.extractLocation("warps." + warpName, getPathFinder().getBaseConfig());
 
 
                 if (configBoolean("warp.only-safe-location")) {
@@ -107,7 +107,7 @@ public class WarpCommand extends AbstractCommand {
                     return;
                 }
 
-                CustomLocation warplocation = LocationUtils.extractLocation("warps." + warpName, getPathFinder().getBaseConfig());
+                CustomLocation warplocation = PathFinderUtils.extractLocation("warps." + warpName, getPathFinder().getBaseConfig());
 
 
                 if (configBoolean("warp.only-safe-location")) {

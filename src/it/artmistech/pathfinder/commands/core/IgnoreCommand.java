@@ -1,16 +1,12 @@
 package it.artmistech.pathfinder.commands.core;
 
-import com.mysql.fabric.xmlrpc.base.Data;
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.AbstractCommand;
 import it.artmistech.pathfinder.enums.SenderEnum;
-import it.artmistech.pathfinder.sqlite.Database;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
-import java.sql.*;
 import java.util.*;
 
 public class IgnoreCommand extends AbstractCommand {

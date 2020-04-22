@@ -46,7 +46,6 @@ public class IgnoredUtils {
 
             rs.next();
             sqlArray = rs.getArray("ignoredUsers");
-            ;
 
             if (sqlArray == null) {
                 return null;

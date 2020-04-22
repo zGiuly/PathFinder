@@ -4,7 +4,6 @@ import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.AbstractCommand;
 import it.artmistech.pathfinder.enums.SenderEnum;
 import it.artmistech.pathfinder.types.CustomLocation;
-import it.artmistech.pathfinder.utils.LocationUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

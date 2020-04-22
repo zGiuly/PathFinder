@@ -1,6 +1,6 @@
 package it.artmistech.pathfinder.types;
 
-import it.artmistech.pathfinder.utils.LocationUtils;
+import it.artmistech.pathfinder.utils.PathFinderUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -59,7 +59,7 @@ public class CustomLocation extends Location {
      * @return
      */
     public boolean isSafe() {
-        return LocationUtils.isSafeLocation(this);
+        return PathFinderUtils.isSafeLocation(this);
     }
 
 

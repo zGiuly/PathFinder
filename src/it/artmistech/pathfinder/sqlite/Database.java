@@ -1,7 +1,5 @@
 package it.artmistech.pathfinder.sqlite;
 
-import it.artmistech.pathfinder.utils.DatabaseUtils;
-
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;

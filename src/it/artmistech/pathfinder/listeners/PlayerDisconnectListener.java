@@ -6,10 +6,8 @@ import it.artmistech.pathfinder.commands.staff.FreezeCommand;
 import it.artmistech.pathfinder.commands.staff.StaffChatCommand;
 import it.artmistech.pathfinder.commands.teleport.TpaCommand;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.Iterator;
 import java.util.Map;
 
 public class PlayerDisconnectListener extends AbstractListener {

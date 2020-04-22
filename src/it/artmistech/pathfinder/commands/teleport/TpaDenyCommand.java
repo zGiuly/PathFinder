@@ -3,12 +3,9 @@ package it.artmistech.pathfinder.commands.teleport;
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.AbstractCommand;
 import it.artmistech.pathfinder.enums.SenderEnum;
-import it.artmistech.pathfinder.types.CustomLocation;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.concurrent.atomic.AtomicReference;
 
 public class TpaDenyCommand extends AbstractCommand {
     public TpaDenyCommand(PathFinder pathFinder) {

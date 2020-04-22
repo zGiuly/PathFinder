@@ -15,7 +15,6 @@ import it.artmistech.pathfinder.io.PluginFile;
 import it.artmistech.pathfinder.sqlite.Database;
 import it.artmistech.pathfinder.updater.UpdateCheck;
 import it.artmistech.pathfinder.utils.DatabaseUtils;
-import it.artmistech.pathfinder.utils.IgnoredUtils;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;

@@ -6,7 +6,6 @@ import it.artmistech.pathfinder.enums.SenderEnum;
 import it.artmistech.pathfinder.listeners.StaffUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 

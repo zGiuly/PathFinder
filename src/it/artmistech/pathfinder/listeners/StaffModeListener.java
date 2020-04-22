@@ -2,10 +2,8 @@ package it.artmistech.pathfinder.listeners;
 
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.staff.FollowCommand;
-import it.artmistech.pathfinder.commands.staff.FreezeCommand;
 import it.artmistech.pathfinder.utils.FreezeUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

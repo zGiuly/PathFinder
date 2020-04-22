@@ -3,7 +3,6 @@ package it.artmistech.pathfinder.utils;
 import it.artmistech.pathfinder.sqlite.Database;
 
 import javax.annotation.Nonnull;
-import javax.xml.crypto.Data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

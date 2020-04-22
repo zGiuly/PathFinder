@@ -4,7 +4,6 @@ import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.AbstractCommand;
 import it.artmistech.pathfinder.enums.SenderEnum;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -15,8 +14,6 @@ public class TpaCommand extends AbstractCommand {
     private static HashMap<String, Long> cooldown;
     private static HashMap<String, String> inProgress;
 
-    private final BukkitTask asyncTask;
-
     private final int maxTime;
 
     public TpaCommand(PathFinder pathFinder) {
@@ -26,7 +23,7 @@ public class TpaCommand extends AbstractCommand {
 
         maxTime = configInt("tpa.max-time");
 
-        asyncTask = Bukkit.getScheduler().runTaskTimerAsynchronously(getPathFinder(), () -> {
+        BukkitTask asyncTask = Bukkit.getScheduler().runTaskTimerAsynchronously(getPathFinder(), () -> {
             try {
                 long now = System.currentTimeMillis() / 1000;
 
