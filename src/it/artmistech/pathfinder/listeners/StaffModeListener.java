@@ -2,7 +2,7 @@ package it.artmistech.pathfinder.listeners;
 
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.staff.FollowCommand;
-import it.artmistech.pathfinder.utils.FreezeUtils;
+import it.artmistech.pathfinder.utils.PathFinderUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -33,7 +33,7 @@ public class StaffModeListener extends AbstractListener {
             for (Entity nearbyEntity : event.getPlayer().getNearbyEntities(5, 5, 5)) {
                 if(nearbyEntity instanceof Player) {
                     Player player = (Player)nearbyEntity;
-                    FreezeUtils.blockUser(player.getName(), event.getPlayer().getName());
+                    PathFinderUtils.blockUser(player.getName(), event.getPlayer().getName());
                     return;
                 }
             }

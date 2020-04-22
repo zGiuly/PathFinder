@@ -1,7 +1,7 @@
 package it.artmistech.pathfinder.listeners;
 
 import it.artmistech.pathfinder.PathFinder;
-import it.artmistech.pathfinder.utils.TitleUtils;
+import it.artmistech.pathfinder.utils.PathFinderUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -34,7 +34,7 @@ public class WelcomeListener extends AbstractListener {
         event.getPlayer().sendMessage(welcomeMessage.replaceAll("%p", event.getPlayer().getName()));
 
         if (!welcomeTitle.isEmpty() && !welcomeSubtitle.isEmpty()) {
-            TitleUtils.send(event.getPlayer(), welcomeTitle.replaceAll("%p", event.getPlayer().getName()), welcomeSubtitle.replaceAll("%p", event.getPlayer().getName()), 0, 60, 10);
+            PathFinderUtils.send(event.getPlayer(), welcomeTitle.replaceAll("%p", event.getPlayer().getName()), welcomeSubtitle.replaceAll("%p", event.getPlayer().getName()), 0, 60, 10);
         }
 
         if (globalWelcome) {

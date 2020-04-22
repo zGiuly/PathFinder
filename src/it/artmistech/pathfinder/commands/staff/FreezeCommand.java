@@ -3,7 +3,7 @@ package it.artmistech.pathfinder.commands.staff;
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.AbstractCommand;
 import it.artmistech.pathfinder.enums.SenderEnum;
-import it.artmistech.pathfinder.utils.FreezeUtils;
+import it.artmistech.pathfinder.utils.PathFinderUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -40,8 +40,8 @@ public class FreezeCommand extends AbstractCommand {
             return;
         }
 
-        if (!FreezeUtils.isBlocked(target.getName())) {
-            FreezeUtils.blockUser(target.getName(), player.getName());
+        if (!PathFinderUtils.isBlocked(target.getName())) {
+            PathFinderUtils.blockUser(target.getName(), player.getName());
             player.sendMessage("§aPlayer §e" + target.getName() + "§a is blocked!");
             target.sendMessage(ChatColor.translateAlternateColorCodes('&', configString("freeze.start-message")));
         } else {

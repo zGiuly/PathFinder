@@ -2,7 +2,7 @@ package it.artmistech.pathfinder.listeners;
 
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.staff.FreezeCommand;
-import it.artmistech.pathfinder.utils.FreezeUtils;
+import it.artmistech.pathfinder.utils.PathFinderUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -19,7 +19,7 @@ public class ControlledPlayerListener extends AbstractListener {
 
     @EventHandler
     public void controlledMove(PlayerMoveEvent event) {
-        if (!FreezeUtils.isBlocked(event.getPlayer().getName())) return;
+        if (!PathFinderUtils.isBlocked(event.getPlayer().getName())) return;
 
         event.getPlayer().teleport(event.getFrom());
         event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', configString("freeze.move-message")));
@@ -28,7 +28,7 @@ public class ControlledPlayerListener extends AbstractListener {
 
     @EventHandler
     public void controlledChat(AsyncPlayerChatEvent event) {
-        if (!FreezeUtils.isBlocked(event.getPlayer().getName())) return;
+        if (!PathFinderUtils.isBlocked(event.getPlayer().getName())) return;
 
         Player checker = Bukkit.getPlayerExact(FreezeCommand.getFreezedPlayers().get(event.getPlayer().getName()));
 
@@ -76,7 +76,7 @@ public class ControlledPlayerListener extends AbstractListener {
 
     @EventHandler
     public void controlledBlockBreak(BlockBreakEvent event) {
-        if (!FreezeUtils.isBlocked(event.getPlayer().getName())) return;
+        if (!PathFinderUtils.isBlocked(event.getPlayer().getName())) return;
         event.setCancelled(true);
     }
 }
