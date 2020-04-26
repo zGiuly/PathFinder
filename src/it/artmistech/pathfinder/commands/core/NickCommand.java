@@ -3,7 +3,7 @@ package it.artmistech.pathfinder.commands.core;
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.AbstractCommand;
 import it.artmistech.pathfinder.enums.SenderEnum;
-import it.artmistech.pathfinder.utils.NicknameUtils;
+import it.artmistech.pathfinder.utils.PathFinderUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -28,7 +28,7 @@ public class NickCommand extends AbstractCommand {
                 player.setDisplayName(player.getName());
                 player.setPlayerListName(player.getName());
 
-                NicknameUtils.removeName(getPathFinder().getDefaultDatabase(), player.getName());
+                PathFinderUtils.removeName(getPathFinder().getDefaultDatabase(), player.getName());
 
                 player.sendMessage("§aNickname reset");
                 return;
@@ -37,7 +37,7 @@ public class NickCommand extends AbstractCommand {
                 player.setDisplayName(player.getName());
                 player.setPlayerListName(player.getName());
 
-                NicknameUtils.removeName(getPathFinder().getDefaultDatabase(), player.getName());
+                PathFinderUtils.removeName(getPathFinder().getDefaultDatabase(), player.getName());
 
                 player.sendMessage("§aNickname reset");
                 return;
@@ -65,7 +65,7 @@ public class NickCommand extends AbstractCommand {
 
             player.sendMessage("§aNew nickname is §e" + strings[0]);
 
-            NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), strings[0], player.getName());
+            PathFinderUtils.saveName(getPathFinder().getDefaultDatabase(), strings[0], player.getName());
         } else if (strings.length == 2) {
             if (!player.hasPermission("pathfinder.nick.other")) return;
 
@@ -96,7 +96,7 @@ public class NickCommand extends AbstractCommand {
                 target.setDisplayName(target.getName());
                 target.setCustomName(target.getName());
 
-                NicknameUtils.removeName(getPathFinder().getDefaultDatabase(), target.getName());
+                PathFinderUtils.removeName(getPathFinder().getDefaultDatabase(), target.getName());
             }
 
             target.setCustomName(coloredNick);
@@ -104,7 +104,7 @@ public class NickCommand extends AbstractCommand {
             player.setPlayerListName(coloredNick);
             target.sendMessage("§cNow your name is §e" + strings[1]);
 
-            NicknameUtils.saveName(getPathFinder().getDefaultDatabase(), strings[1], target.getName());
+            PathFinderUtils.saveName(getPathFinder().getDefaultDatabase(), strings[1], target.getName());
         } else {
             player.sendMessage("§cSyntax error");
         }
@@ -112,6 +112,6 @@ public class NickCommand extends AbstractCommand {
 
 
     private boolean nicknameExists(String name) {
-        return NicknameUtils.extractRealNameFromDatabase(getPathFinder().getDefaultDatabase(), name) == null;
+        return PathFinderUtils.extractRealNameFromDatabase(getPathFinder().getDefaultDatabase(), name) == null;
     }
 }

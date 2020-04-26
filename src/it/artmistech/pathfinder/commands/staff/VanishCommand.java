@@ -3,7 +3,7 @@ package it.artmistech.pathfinder.commands.staff;
 import it.artmistech.pathfinder.PathFinder;
 import it.artmistech.pathfinder.commands.AbstractCommand;
 import it.artmistech.pathfinder.enums.SenderEnum;
-import it.artmistech.pathfinder.utils.VanishUtils;
+import it.artmistech.pathfinder.utils.PathFinderUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -24,10 +24,10 @@ public class VanishCommand extends AbstractCommand {
         if(!player.hasPermission("pathfinder.vanish")) return;
 
         if(!vanishPlayers.contains(player.getName())) {
-            VanishUtils.setInvisible(getPathFinder(), player);
+            PathFinderUtils.setInvisible(getPathFinder(), player);
             player.sendMessage("§aNow you are invisible!");
         } else {
-            VanishUtils.setVisible(getPathFinder(), player);
+            PathFinderUtils.setVisible(getPathFinder(), player);
             player.sendMessage("§aNow you are visible!");
         }
     }

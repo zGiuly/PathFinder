@@ -1,7 +1,7 @@
 package it.artmistech.pathfinder.listeners;
 
 import it.artmistech.pathfinder.PathFinder;
-import it.artmistech.pathfinder.utils.NicknameUtils;
+import it.artmistech.pathfinder.utils.PathFinderUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -12,7 +12,7 @@ public class PlayerJoinListener extends AbstractListener {
 
     @EventHandler
     public void changeNickname(PlayerJoinEvent event) {
-        String newName = NicknameUtils.extractNewNameFromDatabase(getPathFinder().getDefaultDatabase(), event.getPlayer().getName());
+        String newName = PathFinderUtils.extractNewNameFromDatabase(getPathFinder().getDefaultDatabase(), event.getPlayer().getName());
 
         if(newName == null) return;
 
